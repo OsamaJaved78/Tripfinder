@@ -263,7 +263,7 @@ export const Teams10DataSource = {
               className: 'teams1-title',
               children: (
                 <span>
-                  <h3>Kashan</h3>
+                  <h3>Kashans</h3>
                 </span>
               ),
             },
