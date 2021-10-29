@@ -32,8 +32,8 @@ class Teams1 extends React.PureComponent {
     const { dataSource } = props;
     delete props.dataSource;
     delete props.isMobile;
-    const listChildren = this.getBlockChildren(dataSource.block.children);
-    // const listChildren =   this.state.persons.map(person => <li>{person.url}</li>)
+    // const listChildren = this.getBlockChildren(dataSource.block.children);
+    const listChildren =   this.state.persons.map(person => <li>{person.url}</li>)
     return (
       <div {...props} {...dataSource.wrapper}>
         <div {...dataSource.page}>

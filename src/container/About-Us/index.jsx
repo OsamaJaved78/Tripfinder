@@ -6,6 +6,7 @@ import { enquireScreen } from 'enquire-js';
 import Content1 from './Content1';
 import Content0 from './Content0';
 import Teams1 from './Teams1';
+import Team2 from './Team2';
 
 import {
   Content10DataSource,
@@ -61,10 +62,9 @@ export default class App extends React.Component {
         dataSource={Content00DataSource}
         isMobile={this.state.isMobile}
       />,
-      <Teams1
+      <Team2
         id="Teams1_0"
         key="Teams1_0"
-        dataSource={Teams10DataSource}
         isMobile={this.state.isMobile}
       />,
     ];

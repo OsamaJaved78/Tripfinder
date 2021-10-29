@@ -2,6 +2,7 @@ import React from 'react';
 import axios from "axios";
 import { FaTwitter,FaInstagram,FaFacebookSquare } from "react-icons/fa";
 
+const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
   export const Content10DataSource = {
   
     wrapper: {
@@ -37,7 +38,8 @@ import { FaTwitter,FaInstagram,FaFacebookSquare } from "react-icons/fa";
       ),
     },
   };
- 
+
+
 export const Content00DataSource = {
   wrapper: { className: 'home-page-wrapper content0-wrapper' },
   page: { className: 'home-page content0' },
