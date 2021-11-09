@@ -3,7 +3,7 @@ import './MainContact.css';
 import axios from "axios";
 import { FaMapMarkerAlt,FaPhoneAlt,FaTelegramPlane,FaGlobeAsia } from "react-icons/fa";
 
-const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
+const baseURL = "https://buskarao.thebloodraw.com/api/contact";
 
 function ContactForm() {
 		const [post, setPost] = React.useState(null);
@@ -32,7 +32,7 @@ function ContactForm() {
 			        			<span className="fa fa-map-marker"><FaMapMarkerAlt/></span>
 			        		</div>
 			        		<div className="text">
-				            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+				            <p><span>Address:</span> {post.address}</p>
 				          </div>
 			          </div>
 							</div>
@@ -42,7 +42,7 @@ function ContactForm() {
 			        			<span className="fa fa-phone"><FaPhoneAlt/></span>
 			        		</div>
 			        		<div className="text">
-				            <p><span>Phone:</span> <a href="tel://1234567920">{post.title}</a></p>
+				            <p><span>Phone:</span> <a href="tel://1234567920">{post.contact_number}</a></p>
 				          </div>
 			          </div>
 							</div>
@@ -52,7 +52,7 @@ function ContactForm() {
 			        			<span className="fa fa-paper-plane"><FaTelegramPlane/></span>
 			        		</div>
 			        		<div className="text">
-				            <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+				            <p><span>Email:</span> <a href="mailto:info@yoursite.com">{post.email_address}</a></p>
 				          </div>
 			          </div>
 							</div>
@@ -112,8 +112,7 @@ function ContactForm() {
 								</div>
 							</div>
 							<div className="col-md-5 d-flex align-items-stretch">
-								<div className="info-wrap w-100 p-5 img" style={{backgroundImage: `url(https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80)` }}>
-			          </div>
+							<div style={{width:'100%'}}><iframe width="100%" height="100%" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" src={post.embed_code}><a href="http://www.gps.ie/">gps devices</a></iframe></div>
 							</div>
 						</div>
 					</div>
