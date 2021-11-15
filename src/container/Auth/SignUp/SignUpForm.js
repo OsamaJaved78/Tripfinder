@@ -2,58 +2,98 @@ import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { MdLockOpen } from "react-icons/md";
-import { Input, Switch, Button, Spin } from "antd";
+import { Input, Switch, Button, Spin , Checkbox} from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import FormControl from "components/UI/FormControl/FormControl";
 import { AuthContext } from "context/AuthProvider";
 import { FieldWrapper, SwitchWrapper, Label } from "../Auth.style";
+import axios from 'axios';
 
 export default () => {
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: "#fff" }} spin />
   );
+
+  const[errors,setErrors] = useState('');
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        password:""
+      });
+      
+      const {name, email,password} = user;
+      const onInputChange = e => {
+        setUser({ ...user, [e.target.name]: e.target.value });
+      };
+
+      async function  signup()
+       {
+        let result = await axios.post("http://localhost/projects/admin-bus/api/register",user);
+        setErrors('Registration Successful')
+        setUser({name:"",email:"",password:""}) // To Clear all fields
+ 
+        }  
+
+  
   const [Loading, setLoading] = useState(false);
-  const { signUp, loggedIn } = useContext(AuthContext);
-  const { control, watch, errors, handleSubmit } = useForm({
+  // const { signUp, loggedIn } = useContext(AuthContext);
+  const { control, watch,  handleSubmit } = useForm({
     mode: "onChange",
   });
-  const password = watch("password");
-  const confirmPassword = watch("confirmPassword");
+  // const password = watch("password");
+  // const confirmPassword = watch("confirmPassword");
   const onSubmit = (data) => {
     setLoading(true);
-    signUp(data);
+    signup(data);
   };
-  if (loggedIn) {
-    return <Redirect to={{ pathname: "/" }} />;
-  }
+  // if (loggedIn) {
+  //   return <Redirect to={{ pathname: "/" }} />;
+  // }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form >
       <FormControl
         label="First name"
-        htmlFor="firstname"
+        htmlFor="name"
         error={
-          errors.firstname && (
+          errors.name && (
             <>
-              {errors.firstname?.type === "required" && (
+              {errors.name?.type === "required" && (
                 <span>This field is required!</span>
               )}
             </>
           )
         }
       >
-        <Controller
-          as={<Input />}
-          id="firstname"
-          name="firstname"
-          defaultValue=""
+
+        {/* <Controller
+          as={<Input/>}
+          id="name"
+          name="name"
+          value={name}
+          // onChange={e => onInputChange(e)}
+          // defaultValue=""
           control={control}
           rules={{
             required: true,
           }}
-        />
+          
+          // name="name"
+          // // defaultValue=""
+        /> */}
+
+
+        <Controller
+        placeholder="AntD Input"
+        control={control}
+        name="AntdInput"
+        render={({ field }) => <Input {...field} />}
+      />
       </FormControl>
-      <FormControl
+
+      
+          
+      {/* <FormControl
         label="Last name"
         htmlFor="lastname"
         error={
@@ -76,7 +116,7 @@ export default () => {
             required: true,
           }}
         />
-      </FormControl>
+      </FormControl> */}
 
       <FormControl
         label="Email"
@@ -94,13 +134,14 @@ export default () => {
           )
         }
       >
-        <Controller
-          as={<Input />}
+        
+          <Input 
           type="email"
-          id="email"
+          // id="email"
           name="email"
+          value={email}
+          onChange={e => onInputChange(e)}
           defaultValue=""
-          control={control}
           rules={{
             required: true,
             pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
@@ -126,12 +167,12 @@ export default () => {
           )
         }
       >
-        <Controller
-          as={<Input.Password />}
+          <Input
           defaultValue=""
-          control={control}
           id="password"
           name="password"
+          value={password}
+          onChange={e => onInputChange(e)}
           rules={{ required: true, minLength: 6, maxLength: 20 }}
         />
       </FormControl>
@@ -153,7 +194,7 @@ export default () => {
           name="confirmPassword"
         />
       </FormControl> */}
-      <FieldWrapper>
+      {/* <FieldWrapper>
         <SwitchWrapper>
           <Controller
             as={<Switch />}
@@ -174,12 +215,13 @@ export default () => {
           />
           <Label>I agree with terms and conditions</Label>
         </SwitchWrapper>
-      </FieldWrapper>
-      <Button
+      </FieldWrapper> */}
+      {/* <Button
         className="signin-btn"
         type="primary"
         htmlType="submit"
         size="large"
+        onClick={signup}
         style={{ width: "100%" }}
       >
         {!Loading ? (
@@ -192,7 +234,8 @@ export default () => {
             <Spin indicator={antIcon} />
           </>
         )}
-      </Button>
+      </Button> */}
+      <Button type='submit' onClick={signup} color='primary' >Singup</Button>
     </form>
   );
 };

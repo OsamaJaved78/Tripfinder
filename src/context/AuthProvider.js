@@ -14,7 +14,7 @@ const fakeUserData = {
 
 const AuthProvider = (props) => {
   let history = useHistory();
-  const [loggedIn, setLoggedIn] = useState(true);//filhal maine true krdya ha login ke lye
+  const [loggedIn, setLoggedIn] = useState(false);//filhal maine true krdya ha login ke lye
   const [name, setName] = useState("");
   const [conditions, setConditions] = useState("");
   const [user, setUser] = useState({});
